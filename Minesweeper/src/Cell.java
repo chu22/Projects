@@ -151,8 +151,7 @@ public class Cell {
 		else if(label==NORM_P){
 			label = NORM;			//change back to normal
 			state = 0;
-		}
-		
+		}	
 	}
 	
 	/*
@@ -195,9 +194,11 @@ public class Cell {
 	public void showBomb(){
 		if(val==-1&&label!=FLAG){
 			label = BOMB;
+			state = 5;
 		}
-		if(val!=-1&&label==FLAG){
+		else if(val!=-1&&label==FLAG){
 			label = BOMB;
+			state = 5;
 		}
 	}
 	

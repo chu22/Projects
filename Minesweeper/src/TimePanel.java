@@ -35,8 +35,7 @@ public class TimePanel extends JPanel{
 		ones = Digit.d[0];
 		dh = 0;
 		dt = 0;
-		d1 = 0;
-		
+		d1 = 0;	
 	}
 	
 	public void incTime(){

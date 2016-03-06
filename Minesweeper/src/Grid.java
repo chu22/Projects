@@ -77,8 +77,7 @@ public class Grid extends JPanel{
 				bombs[ctr]=grid[r][c];
 				ctr++;
 			}
-		}
-		
+		}	
 	}
 	
 	private void setBoard(){
@@ -117,11 +116,7 @@ public class Grid extends JPanel{
 	}
 	
 	/* GETTERS */
-	
-	public int getState(int r, int c){
-		return grid[r][c].getState();
-	}
-	
+
 	public int getnFlags(){
 		return nFlags;
 	}
@@ -219,7 +214,7 @@ public class Grid extends JPanel{
 			if(over&&calcFlags(r,c)==grid[r][c].getVal()){				//if mouse is over last cell pressed, correct number of adjacent flags
 				for(int i = r-1;i<=r+1;i++){
 					for(int j = c-1;j<=c+1;j++){
-						if(!explode&&grid[r][c].isAdjacent(i,j)&&grid[i][j].getState()!=6){
+						if(grid[r][c].isAdjacent(i,j)&&grid[i][j].getState()!=6){
 							clickCell(i,j);								//simulate left click on each adjacent unclicked cell
 						}
 					}
@@ -351,6 +346,4 @@ public class Grid extends JPanel{
 	private boolean validCoord(int r, int c){
 		return r<10&&r>=0&&c<10&&c>=0;
 	}
-	
-	
 }

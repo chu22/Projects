@@ -47,9 +47,5 @@ public class Menu extends JMenuBar{
 	
 	public JMenuItem getItem(int i){
 		return items[i];
-	}
-	
-	
-	
-	
+	}	
 }

@@ -44,6 +44,8 @@ public class HighScores {
 	public HighScores(){
 		scores = new ArrayList<Score>(MAX);
 		scoreTable = new JTable();
+		scoreTable.setEnabled(false);
+		scoreTable.getTableHeader().setReorderingAllowed(false);
 		loadScoreFile();
 		updateTable();
 	}
@@ -140,6 +142,5 @@ public class HighScores {
 	
 	public JTable getTable(){
 		return scoreTable;
-	}
-	
+	}	
 }

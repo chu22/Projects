@@ -110,7 +110,6 @@ public class Minesweeper extends JFrame {
 				}
 			}
 		});
-
 	}
 	
 	public void reset(){
@@ -141,15 +140,11 @@ public class Minesweeper extends JFrame {
 	 /* EVENT HANDLERS */
 	
 	private class gridHandler implements MouseListener{
-		private static final int LEFT = MouseEvent.BUTTON1_DOWN_MASK;	//constant bit that indicates left mouse is down
-		private static final int RIGHT = MouseEvent.BUTTON3_DOWN_MASK;	//constant bit that indicates right mouse is down
-		private static final int BOTH = LEFT | RIGHT;					
+		private static final int BOTH = MouseEvent.BUTTON1_DOWN_MASK | MouseEvent.BUTTON3_DOWN_MASK;					
 		private boolean bothDown = false;								//boolean to check if both mouse buttons are down
 		
 		@Override
-		public void mouseClicked(MouseEvent e) {
-				
-		}
+		public void mouseClicked(MouseEvent e) {}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
@@ -167,8 +162,7 @@ public class Minesweeper extends JFrame {
 			else{
 				g.doubleMousePressed(e);
 				g.repaint();
-			}
-			
+			}	
 		}
 
 		@Override
@@ -211,67 +205,59 @@ public class Minesweeper extends JFrame {
 				r.mouseReleased();						//change reset button to :)
 			}
 			r.repaint();
-			
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
+		public void mouseEntered(MouseEvent e) {}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
-		
+		public void mouseExited(MouseEvent e) {}
 	}
 		
 	private class ResetHandler implements MouseListener{
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-		}
+		public void mouseClicked(MouseEvent e) {}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			r.resetPressed();
-			r.repaint();
-			
+			if(e.getButton() == MouseEvent.BUTTON1)
+		    {
+				r.resetPressed();
+				r.repaint();	
+		    }
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			int x = e.getX();
-			int y = e.getY();
-			if(x>=0&&x<=ResetPanel.width&&y>=0&&y<=ResetPanel.height){
-				reset();
-			}
-			if(!g.gameOver()){
-				r.mouseReleased();
-				r.repaint();
-			}
-			else{
-				if(g.gameWon()){
-					r.gameWon();
+			if(e.getButton() == MouseEvent.BUTTON1)
+		    {
+				int x = e.getX();
+				int y = e.getY();
+				if(x>=0&&x<=ResetPanel.width&&y>=0&&y<=ResetPanel.height){
+					reset();
+				}
+				if(!g.gameOver()){
+					r.mouseReleased();
+					r.repaint();
 				}
 				else{
-					r.gameLost();
+					if(g.gameWon()){
+						r.gameWon();
+					}
+					else{
+						r.gameLost();
+					}
+					r.repaint();
 				}
-				r.repaint();
-			}
+		    }
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
+		public void mouseEntered(MouseEvent e) {}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
-		
+		public void mouseExited(MouseEvent e) {}
 	}
 	
 	private class TimerHandler implements ActionListener{
@@ -280,9 +266,7 @@ public class Minesweeper extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			t.incTime();
 			t.repaint();
-			
-		}
-		
+		}	
 	}
 	
 	private class resetMenuHandler implements ActionListener{
@@ -292,7 +276,6 @@ public class Minesweeper extends JFrame {
 			r.mouseReleased();
 			reset();
 		}
-		
 	}
 	
 	private class scoresMenuHandler implements ActionListener{
@@ -303,15 +286,11 @@ public class Minesweeper extends JFrame {
 			scoresPane.getViewport().remove( scoresTable );		//remove old table and add new table to high scores scrollpane
 			scoresTable = h.getTable();
 			scoresPane.getViewport().add( scoresTable );
-			
 			JOptionPane.showMessageDialog(Minesweeper.this,
 				    scoresPane,
 				    "High Scores",
 				    JOptionPane.PLAIN_MESSAGE);
-			
-			
 		}
-		
 	}
 	
 	private class resetScoresMenuHandler implements ActionListener{
@@ -320,7 +299,6 @@ public class Minesweeper extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			h.resetScoreFile();
 		}
-		
 	}
 	
 	private class exitMenuHandler implements ActionListener{
@@ -329,7 +307,6 @@ public class Minesweeper extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
 		}
-		
 	}
 
 	 /* 
@@ -356,7 +333,7 @@ public class Minesweeper extends JFrame {
 		     "         - If you are unsure, right clicking a marked tile will turn it into a question mark.\n" +
 		     "         - Note that there can be as many flags on the board as there are tiles, but the game will only finish\n" +
 		     "           if there are 10 or less flags on the board (having more than 10 means you marked a tile with no mine).\n" +
-		     "     - Clicking the Smiley Face with any mouse button will start a new game.\n";
+		     "     - Left clicking the Smiley Face will start a new game.\n";
 		   return str;
 		 }
 
@@ -370,8 +347,6 @@ public class Minesweeper extends JFrame {
 		        "Help",
 		        JOptionPane.PLAIN_MESSAGE);
 		  }
-
-		
 	}
 	
 	private class aboutMenuHandler implements ActionListener{
@@ -386,6 +361,5 @@ public class Minesweeper extends JFrame {
 						        JOptionPane.PLAIN_MESSAGE);
 		
 		}
-
 	}
 }
